@@ -1,4 +1,4 @@
-# sweetballshop-Mobile
+# Sweetballshop-Mobile
 
 Nama: Qoriana Syahwa Maharani. <br>
 NPM: 2406437533 <br>
