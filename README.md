@@ -59,3 +59,31 @@ Tanpa BuildContext, widget tidak dapat berinteraksi dengan elemen di sekitarnya.
 - Hot Restart: Menjalankan ulang seluruh aplikasi dari awal, termasuk menginisialisasi ulang semua state. Biasanya digunakan jika ada perubahan besar seperti pada inisialisasi variabel global atau struktur root widget.
 
 Jadi, hot reload mempertahankan state, sedangkan hot restart mengulang aplikasi dari awal.
+
+## **Tugas 8 PBP - Flutter Navigation, Layouts, Forms, and Input Elements**
+
+**1. Jelaskan perbedaan antara Navigator.push() dan Navigator.pushReplacement() pada Flutter. Dalam kasus apa sebaiknya masing-masing digunakan pada aplikasi Football Shop kamu?** <br>
+Navigator.push() digunakan untuk menambahkan halaman baru ke dalam tumpukan (stack) navigasi tanpa menghapus halaman sebelumnya. Artinya, pengguna masih bisa kembali ke halaman awal menggunakan tombol “back”.
+Sedangkan Navigator.pushReplacement() akan menggantikan halaman yang sedang aktif dengan halaman baru, sehingga pengguna tidak dapat kembali ke halaman sebelumnya.
+
+Dalam aplikasi Sweetball Shop, saya menggunakan Navigator.push() untuk membuka halaman Form Tambah Produk, karena setelah pengguna menambah produk, mereka mungkin ingin kembali ke halaman utama.
+Sedangkan Navigator.pushReplacement() digunakan pada menu Halaman Utama di LeftDrawer, supaya ketika berpindah ke halaman utama, halaman sebelumnya tidak lagi tersimpan dalam stack (mencegah duplikasi halaman yang sama saat navigasi berulang).
+
+**2. Bagaimana kamu memanfaatkan hierarchy widget seperti Scaffold, AppBar, dan Drawer untuk membangun struktur halaman yang konsisten di seluruh aplikasi?** <br>
+Struktur utama setiap halaman dalam aplikasi saya mengikuti hierarchy widget yang konsisten, dimulai dari Scaffold sebagai kerangka dasar halaman.
+- AppBar digunakan untuk menampilkan judul halaman dan memberikan identitas yang seragam di seluruh aplikasi, misalnya dengan warna biru khas “Sweetball Shop”.
+- Drawer (yang diimplementasikan melalui widget LeftDrawer) berfungsi sebagai navigasi samping untuk berpindah antarhalaman, seperti menuju halaman utama atau form tambah produk.
+
+Dengan pendekatan ini, setiap halaman memiliki tampilan dan struktur yang konsisten sehingga pengguna menjadi lebih nyaman dan terarah.
+
+**3. Dalam konteks desain antarmuka, apa kelebihan menggunakan layout widget seperti Padding, SingleChildScrollView, dan ListView saat menampilkan elemen-elemen form? Berikan contoh penggunaannya dari aplikasi kamu.** <br>
+Penggunaan widget seperti Padding, SingleChildScrollView, dan ListView membantu menjaga tata letak (layout) antarmuka agar tetap rapi dan mudah digunakan, terutama pada halaman dengan banyak elemen input seperti form.
+- Padding memberikan jarak antar-elemen agar tampilan tidak terlihat sempit dan mudah dibaca.
+- SingleChildScrollView memungkinkan pengguna menggulir halaman saat konten melebihi ukuran layar, terutama saat form diisi pada perangkat dengan layar kecil.
+- ListView berguna untuk menampilkan daftar elemen yang panjang dengan efisien dan dapat di-scroll otomatis.
+
+Contohnya, pada halaman Form Tambah Produk, saya menempatkan seluruh elemen form di dalam SingleChildScrollView dan menambahkan Padding di setiap input field agar tata letaknya tetap nyaman di berbagai ukuran layar.
+
+**4.  Bagaimana kamu menyesuaikan warna tema agar aplikasi Football Shop memiliki identitas visual yang konsisten dengan brand toko?** <br>
+Untuk menjaga konsistens identitas visual aplikasi Sweetball Shop, saya menyesuaikan warna tema melalui properti ThemeData di file main.dart.
+Saya menggunakan kombinasi warna biru utama (primary) dan aksen biru muda (secondary) yang merepresentasikan karakter modern dan energik dari brand toko. Warna ini diterapkan secara konsisten di seluruh elemen penting seperti AppBar, tombol utama, dan Drawer, sehingga pengguna dapat mengenali nuansa khas aplikasi sejak pertama kali membuka halaman. Cara ini membantu menjaga tampilan aplikasi tetap selaras dan terlihat rapi di setiap halaman, sehingga identitas brand-nya tetap terasa meskipun pengguna berpindah antarhalaman.
