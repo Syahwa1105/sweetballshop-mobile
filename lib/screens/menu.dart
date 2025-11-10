@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sweetballshop/widgets/left_drawer.dart';
+import 'package:sweetballshop/widgets/item_card.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
@@ -7,10 +9,10 @@ class MyHomePage extends StatelessWidget {
   final String npm = "2406437533";
   final String kelas = "B";
 
-  final List<_ItemHomepage> items = [
-    _ItemHomepage("All Products", Icons.list_alt, Colors.blue),
-    _ItemHomepage("My Products", Icons.person, Colors.green),
-    _ItemHomepage("Create Product", Icons.add_box, Colors.red),
+  final List<Map<String, dynamic>> items = [
+    {"name": "All Products", "icon": Icons.list_alt, "color": Colors.blue},
+    {"name": "My Products", "icon": Icons.person, "color": Colors.green},
+    {"name": "Create Product", "icon": Icons.add_box, "color": Colors.red},
   ];
 
   @override
@@ -23,6 +25,7 @@ class MyHomePage extends StatelessWidget {
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
+      drawer: const LeftDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -39,7 +42,7 @@ class MyHomePage extends StatelessWidget {
             const SizedBox(height: 16.0),
 
             const Text(
-              'Selamat datang di Sweettball Shop!',
+              'Selamat datang di Sweetball Shop!',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
             ),
             const SizedBox(height: 12.0),
@@ -52,20 +55,19 @@ class MyHomePage extends StatelessWidget {
               mainAxisSpacing: 10,
               crossAxisCount: 3,
               shrinkWrap: true,
-              children: items.map((item) => ItemCard(item: item)).toList(),
+              children: items.map((item) {
+                return ItemCard(
+                  name: item["name"],
+                  icon: item["icon"],
+                  color: item["color"],
+                );
+              }).toList(),
             ),
           ],
         ),
       ),
     );
   }
-}
-
-class _ItemHomepage {
-  final String name;
-  final IconData icon;
-  final Color color;
-  _ItemHomepage(this.name, this.icon, this.color);
 }
 
 class InfoCard extends StatelessWidget {
@@ -86,46 +88,6 @@ class InfoCard extends StatelessWidget {
             const SizedBox(height: 8.0),
             Text(content),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class ItemCard extends StatelessWidget {
-  final _ItemHomepage item;
-  const ItemCard({super.key, required this.item});
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: item.color,
-      borderRadius: BorderRadius.circular(12),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(12),
-        onTap: () {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(content: Text("Kamu telah menekan tombol ${item.name}!")),
-            );
-        },
-        child: Container(
-          padding: const EdgeInsets.all(8),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(item.icon, color: Colors.white, size: 30.0),
-                const SizedBox(height: 6),
-                Text(
-                  item.name,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ],
-            ),
-          ),
         ),
       ),
     );
