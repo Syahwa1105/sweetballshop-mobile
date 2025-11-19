@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sweetballshop/screens/product_form.dart';
+import 'package:sweetballshop/screens/list_product.dart';
 
 class ItemCard extends StatelessWidget {
   final String name;
@@ -21,18 +22,38 @@ class ItemCard extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
         onTap: () {
-          // munculkan snackBar
+          // SnackBar tetap ditampilkan seperti tugas sebelumnya
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
               SnackBar(content: Text("Kamu telah menekan tombol $name!")),
             );
 
-          // navigasi ke form tambah produk kalau tombol Create Product ditekan
+          // Navigasi sesuai tombol
           if (name == "Create Product") {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const ProductFormPage()),
+              MaterialPageRoute(
+                builder: (context) => const ProductFormPage(),
+              ),
+            );
+          }
+
+          if (name == "All Products") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProductListPage(myProducts: false),
+              ),
+            );
+          }
+
+          if (name == "My Products") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProductListPage(myProducts: true),
+              ),
             );
           }
         },
@@ -42,7 +63,7 @@ class ItemCard extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(icon, color: Colors.white, size: 30.0),
+                Icon(icon, color: Colors.white, size: 30),
                 const SizedBox(height: 6),
                 Text(
                   name,
